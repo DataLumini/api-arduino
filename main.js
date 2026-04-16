@@ -20,9 +20,9 @@ const serial = async (
         {
             host: 'localhost',
             user: 'user_insert',
-            password: 'Urubu100',
-            database: 'sensor',
-            port: 3306
+            password: 'Sptech#2024',
+            database: 'datalumini',
+            port: 3307
         }
     ).promise();
 
@@ -49,8 +49,8 @@ const serial = async (
     // processa os dados recebidos do Arduino
     arduino.pipe(new serialport.ReadlineParser({ delimiter: '\r\n' })).on('data', async (data) => {
         console.log(data);
-        const valores = data.split(';');
-        const sensorLuminosidade = parseInt(valores[0]);
+        const valores = data.split(':');
+        const sensorLuminosidade = parseInt(valores[1]);
 
 
         // armazena os valores dos sensores nos arrays correspondentes
@@ -62,11 +62,11 @@ const serial = async (
 
             // este insert irá inserir os dados na tabela "medida"
             await poolBancoDados.execute(
-                'INSERT INTO registro (medida) VALUES (?)',
+                'INSERT INTO leitura (freq_luminosidade,dt_capt_dados, fksensor) VALUES (?, NOW(), 1)',
                 [sensorLuminosidade]
             );
             console.log("valores inseridos no banco: ", sensorLuminosidade );
-
+            
         }
 
     });
