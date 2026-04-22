@@ -19,7 +19,6 @@ void loop() {
 
   float ppfd = lux * PPFD_fator;
 
-  Serial.print("Luminosidade:"); 
   Serial.println(ppfd);
   
   delay(2000);
