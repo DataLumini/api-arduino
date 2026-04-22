@@ -10,8 +10,6 @@ void setup() {
 void loop() {
   valorLuminosidade = analogRead(PINO_SENSOR_LDR);
 
-  Serial.println(valorLuminosidade); 
-
   float voltagem = valorLuminosidade * (5.0 / 1023.0);
   if (voltagem > 4.98) voltagem = 4.98;
 
