@@ -45,7 +45,7 @@ FOREIGN KEY (fkestufa) REFERENCES estufa (idestufa));
 CREATE TABLE leitura(
 idleitura INT PRIMARY KEY AUTO_INCREMENT,
 freq_luminosidade FLOAT,
-dt_capt_dados DATETIME,
+dt_capt_dados DATETIME DEFAULT NOW(),
 fksensor INT,
 CONSTRAINT chsensorleitura
 FOREIGN KEY (fksensor) REFERENCES sensor(idsensor));
